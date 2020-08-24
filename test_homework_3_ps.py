@@ -27,14 +27,10 @@ def test_select_bob_boss(py, visit_site, login):
     py.get("#empsearch_job_title").select("QA Lead")
     py.get("#searchBtn").click()
     py.getx("//a[contains(text(),'774863')]").click()
-    page_field = py.get("#wrapper")
-    # resume_field = py.get("#attachmentList")
-    # assert resume_field.contains(text="Attachments")
-    # if page_field.contains(text="resume"):
-    # pass
-    try:
-        assert page_field.contains(text="resume")
-    except:
-        NameError
-    if page_field.should().not_have_text("resume"):
+
+
+    resume_field = py.webdriver.find_element_by_id("employeeAttachmentDelete__csrf_token")
+    if resume_field.is_displayed():
+        print("Mr '{0}' still  have resume".format(name))
+    else:
         print("Mr '{0}' still doesn't have resume".format(name))
